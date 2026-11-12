@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Mavi, yeşil ve gri su ayak izini öğrenin; örneklerle inceleyin ve etkileşimli hesaplayıcıyla tahmin edin.">
+<title>Su İzleri | Mavi • Yeşil • Gri Su</title>
+<style>
+:root{--navy:#102b46;--blue:#2684d9;--green:#23966b;--gray:#718096;--ink:#203247;--muted:#617286;--paper:#f4f8fb;--white:#fff;--line:#e3ebf2;--shadow:0 16px 45px rgba(25,55,85,.09)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.65 Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}a{color:inherit}.wrap{width:min(1120px,92%);margin:auto}
+header{position:sticky;top:0;z-index:10;background:rgba(255,255,255,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+nav{min-height:72px;display:flex;align-items:center;justify-content:space-between;gap:20px}.brand{font-weight:850;letter-spacing:-.04em;color:var(--navy);font-size:1.25rem;text-decoration:none}.brand span{color:var(--blue)}.navlinks{display:flex;gap:22px;flex-wrap:wrap}.navlinks a{text-decoration:none;color:#53677b;font-size:.92rem;font-weight:650}.navlinks a:hover{color:var(--blue)}
+.hero{padding:78px 0 66px;background:radial-gradient(circle at 85% 15%,#cceee3 0,transparent 28%),radial-gradient(circle at 10% 90%,#d8eaff 0,transparent 32%),linear-gradient(135deg,#f9fcff,#edf6fb)}
+.eyebrow{display:inline-flex;gap:8px;align-items:center;color:#197b72;background:#e0f5ef;border-radius:99px;padding:7px 13px;font-size:.82rem;font-weight:800}.hero h1{font-size:clamp(2.5rem,6vw,4.8rem);line-height:1.04;letter-spacing:-.055em;color:var(--navy);max-width:850px;margin:22px 0}.hero h1 em{font-style:normal;color:var(--blue)}.hero p{max-width:700px;color:var(--muted);font-size:1.13rem}.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}.btn{display:inline-block;border:0;border-radius:12px;padding:12px 18px;font-weight:800;text-decoration:none;cursor:pointer;background:var(--navy);color:#fff}.btn.secondary{background:#fff;color:var(--navy);border:1px solid var(--line)}
+section{padding:66px 0;scroll-margin-top:85px}.section-head{max-width:720px;margin-bottom:28px}.kicker{color:var(--blue);font-weight:850;text-transform:uppercase;letter-spacing:.1em;font-size:.76rem}.section-head h2{font-size:clamp(1.8rem,4vw,2.8rem);letter-spacing:-.04em;line-height:1.12;color:var(--navy);margin:9px 0}.section-head p{color:var(--muted);margin:0}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.card{background:var(--white);border:1px solid var(--line);border-radius:20px;padding:24px;box-shadow:var(--shadow)}.card h3{margin:8px 0;color:var(--navy);font-size:1.3rem}.card p{color:var(--muted);margin:8px 0}.symbol{width:46px;height:46px;border-radius:14px;display:grid;place-items:center;font-size:1.35rem}.blue .symbol{background:#e2f0ff}.green .symbol{background:#e0f5eb}.gray .symbol{background:#edf0f4}.tag{display:inline-block;margin-top:12px;padding:5px 10px;border-radius:99px;font-size:.78rem;font-weight:800}.blue .tag{background:#e2f0ff;color:#1766b1}.green .tag{background:#e0f5eb;color:#16744e}.gray .tag{background:#edf0f4;color:#526174}
+.note{background:#eaf4fb;border-left:4px solid var(--blue);padding:17px 20px;border-radius:0 12px 12px 0;color:#40576b;margin-top:22px}
+.calc-layout{display:grid;grid-template-columns:1.05fr .95fr;gap:20px;align-items:start}.panel{background:#fff;border:1px solid var(--line);border-radius:20px;padding:25px;box-shadow:var(--shadow)}.panel h3{margin:0 0 8px;color:var(--navy)}.panel>p{color:var(--muted);margin-top:0}.field{margin:17px 0}.field label{display:block;font-weight:750;font-size:.92rem;margin-bottom:7px}.field input{width:100%;padding:12px 13px;border:1px solid #cad7e3;border-radius:10px;font:inherit;background:#fbfdff}.field input:focus{outline:3px solid #d7ebff;border-color:var(--blue)}.hint{font-size:.8rem;color:var(--muted);margin-top:5px}.result{background:linear-gradient(145deg,#102b46,#174b70);color:white;border-radius:20px;padding:25px;position:sticky;top:95px}.result h3{margin:0 0 5px}.result .big{font-size:2.7rem;font-weight:900;letter-spacing:-.05em;margin:12px 0 0}.result small{color:#c7d9e8}.bars{display:grid;gap:13px;margin:22px 0}.barrow{display:grid;grid-template-columns:75px 1fr 75px;gap:9px;align-items:center;font-size:.86rem}.track{height:10px;background:#ffffff28;border-radius:20px;overflow:hidden}.fill{height:100%;width:0;border-radius:20px}.fill.b{background:#58aaff}.fill.g{background:#52d49c}.fill.gr{background:#b7c3d0}.result-note{font-size:.82rem;color:#c7d9e8;line-height:1.5}.formula{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;background:#f1f6fa;border:1px solid var(--line);padding:13px;border-radius:10px;overflow-wrap:anywhere;color:#24435f;margin:10px 0}.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.step{background:#fff;border:1px solid var(--line);padding:20px;border-radius:16px}.step b{display:block;color:var(--navy);margin-bottom:7px}.step p{margin:0;color:var(--muted);font-size:.92rem}
+table{width:100%;border-collapse:collapse;background:white;border-radius:15px;overflow:hidden;box-shadow:var(--shadow)}th,td{text-align:left;padding:14px;border-bottom:1px solid var(--line)}th{background:#edf4f9;color:var(--navy)}td{color:#53677b}
+.sources{display:flex;flex-wrap:wrap;gap:12px}.sources a{background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px 15px;text-decoration:none;color:#235d8b;font-weight:700}.sources a:hover{border-color:var(--blue)}
+footer{background:#102b46;color:#d7e5ef;padding:28px 0;font-size:.9rem}footer p{margin:5px 0}.muted{color:var(--muted)}
+@media(max-width:800px){.cards,.steps{grid-template-columns:1fr}.calc-layout{grid-template-columns:1fr}.result{position:static}.navlinks{gap:10px}.navlinks a{font-size:.8rem}.hero{padding:55px 0}}
+@media(max-width:520px){nav{align-items:flex-start;flex-direction:column;padding:13px 0}.navlinks{padding-bottom:5px}.panel,.card{padding:19px}.barrow{grid-template-columns:60px 1fr 60px}}
+</style>
+</head>
+<body>
+<header><nav class="wrap"><a class="brand" href="#top">SU<span>İZİ</span></a><div class="navlinks"><a href="#bilesenler">Üç su türü</a><a href="#hesapla">Hesaplayıcı</a><a href="#yontem">Yöntem</a><a href="#kaynaklar">Kaynaklar</a></div></nav></header>
+<main id="top">
+<section class="hero"><div class="wrap"><span class="eyebrow">💧 SU KAYNAKLARINI TANI</span><h1>Bir ürünün ardındaki <em>su izini</em> keşfet.</h1><p>Su ayak izi; bir ürünün, hizmetin veya sürecin üretiminde tüketilen ve kirletilen tatlı su miktarını anlamamıza yardımcı olur. Bu rehberde mavi, yeşil ve gri suyu öğrenebilir, örnek bir hesaplama yapabilirsin.</p><div class="actions"><a class="btn" href="#bilesenler">Keşfetmeye başla</a><a class="btn secondary" href="#hesapla">Hesaplayıcıya git</a></div></div></section>
+<section id="bilesenler"><div class="wrap"><div class="section-head"><span class="kicker">ÜÇ BİLEŞEN</span><h2>Mavi, yeşil ve gri su ne demek?</h2><p>Bu üç kavram, suyun nereden geldiğini ve üretim sürecinin su kaynakları üzerindeki etkisini ayrı ayrı gösterir.</p></div>
+<div class="cards">
+<article class="card blue"><div class="symbol">💧</div><h3>Mavi su</h3><p>Nehir, göl ve yeraltı suyu gibi yüzey ve yeraltı tatlı su kaynaklarından alınarak tüketilen sudur. Sulama, sanayi ve evsel kullanımla ilişkili olabilir.</p><p><b>Örnek:</b> Bir tarlanın kuyu veya baraj suyuyla sulanması.</p><span class="tag">Yüzey + yeraltı suyu</span></article>
+<article class="card green"><div class="symbol">🌱</div><h3>Yeşil su</h3><p>Yağışla toprağa giren, bitkilerin kök bölgesinde depolanan ve bitkiler tarafından terleme/buharlaşma yoluyla kullanılan yağmur suyudur.</p><p><b>Örnek:</b> Yağmurla büyüyen buğdayın kullandığı toprak nemi.</p><span class="tag">Yağış + toprak nemi</span></article>
+<article class="card gray"><div class="symbol">♻️</div><h3>Gri su ayak izi</h3><p>Üretim sırasında oluşan kirletici yükünün, belirli su kalitesi standartlarını karşılayacak düzeye seyreltilmesi/özümlenmesi için gereken teorik tatlı su hacmidir.</p><p><b>Örnek:</b> Gübre kaynaklı azot kirliliğinin su kalitesi standardına göre değerlendirilmesi.</p><span class="tag">Su kirliliği göstergesi</span></article>
+</div><div class="note"><b>Önemli:</b> Gri su ayak izi, doğrudan atık su miktarı değildir. Bir su kalitesi standardına göre hesaplanan teorik hacimdir.</div></div></section>
+<section id="hesapla" style="background:#edf4f8"><div class="wrap"><div class="section-head"><span class="kicker">ETKİLEŞİMLİ ARAÇ</span><h2>Su ayak izini hesapla</h2><p>Aşağıdaki araç, aynı üretim dönemi ve ürün miktarı için girdiğin hacimleri ürün başına litre cinsinden gösterir. Örnek/öğrenme amaçlıdır.</p></div>
+<div class="calc-layout"><div class="panel"><h3>Verilerini gir</h3><p>Hacimleri m³, üretim miktarını kg olarak gir. Ondalık sayılar için nokta veya virgül kullanabilirsin.</p>
+<div class="field"><label for="blue">Mavi su tüketimi (m³)</label><input id="blue" type="number" min="0" step="any" value="120"><div class="hint">Yüzey veya yeraltı suyundan tüketilen miktar.</div></div>
+<div class="field"><label for="green">Yeşil su tüketimi (m³)</label><input id="green" type="number" min="0" step="any" value="280"><div class="hint">Üretim döneminde kullanılan yağış kaynaklı su.</div></div>
+<div class="field"><label for="pollution">Kirletici yükü (kg)</label><input id="pollution" type="number" min="0" step="any" value="2"><div class="hint">Gri su hesabında ele alınan kirleticinin yükü.</div></div>
+<div class="field"><label for="cmax">İzin verilen azami konsantrasyon, Cmax (mg/L)</label><input id="cmax" type="number" min="0" step="any" value="15"></div>
+<div class="field"><label for="cnat">Doğal arka plan konsantrasyonu, Cnat (mg/L)</label><input id="cnat" type="number" min="0" step="any" value="5"></div>
+<div class="field"><label for="yield">Üretim miktarı (kg)</label><input id="yield" type="number" min="0" step="any" value="1000"></div>
+<button class="btn" id="calc" type="button">Hesapla</button><button class="btn secondary" id="reset" type="button" style="margin-left:7px">Örnek değerlere dön</button><p id="error" role="alert" style="color:#b42318;font-weight:700"></p></div>
+<div class="result" aria-live="polite"><h3>Hesaplama sonucu</h3><small>Toplam su ayak izi yoğunluğu</small><div class="big" id="total">—</div><small>litre / kg ürün</small><div class="bars">
+<div class="barrow"><b>Mavi</b><div class="track"><div class="fill b" id="bbar"></div></div><span id="bval">—</span></div>
+<div class="barrow"><b>Yeşil</b><div class="track"><div class="fill g" id="gbar"></div></div><span id="gval">—</span></div>
+<div class="barrow"><b>Gri</b><div class="track"><div class="fill gr" id="grbar"></div></div><span id="grval">—</span></div></div><div class="result-note" id="detail">Değerleri girip “Hesapla” düğmesine bas.</div></div></div>
+<div class="note">Bu basitleştirilmiş eğitim hesaplayıcısıdır. Gerçek ürün hesabında yerel iklim, ürünün büyüme dönemi, sulama/yağış kaynaklı evapotranspirasyon, verim, kirletici türü ve ilgili su kalite standardı gibi veriler gerekir.</div></div></section>
+<section id="yontem"><div class="wrap"><div class="section-head"><span class="kicker">HESAPLAMA MANTIĞI</span><h2>Nasıl hesaplanır?</h2><p>Önce aynı sistem sınırı ve zaman aralığı belirlenir. Sonra her bileşen ayrı hesaplanır.</p></div>
+<div class="steps"><div class="step"><b>1 · Mavi su</b><p>Üretim sürecinde yüzey ve yeraltı suyundan tüketilen hacim belirlenir. Ürün başına hesap için hacim üretim miktarına bölünür.</p></div><div class="step"><b>2 · Yeşil su</b><p>Bitkinin büyüme döneminde yağıştan gelen ve tüketilen su hacmi belirlenir. Ürün başına değer için verime bölünür.</p></div><div class="step"><b>3 · Gri su</b><p>Kirletici yükü, izin verilen konsantrasyon ile doğal arka plan konsantrasyonu arasındaki farka bölünür.</p></div></div>
+<h3 style="margin:30px 0 8px;color:var(--navy)">Temel formüller</h3>
+<div class="formula">Mavi su ayak izi (L/kg) = Mavi su (m³) × 1000 ÷ Üretim (kg)</div>
+<div class="formula">Yeşil su ayak izi (L/kg) = Yeşil su (m³) × 1000 ÷ Üretim (kg)</div>
+<div class="formula">Gri su (m³) = Kirletici yükü (kg) ÷ [(Cmax − Cnat) × 0,001]</div>
+<div class="formula">Toplam (L/kg) = (Mavi + Yeşil + Gri) (m³) × 1000 ÷ Üretim (kg)</div>
+<p class="muted">Gri su formülünde konsantrasyonlar mg/L cinsindedir; 0,001 katsayısı mg/L birimini kg/m³'e dönüştürür. Standart ürün hesabında kirletici yükünün hesaplanması, kirleticiye özgü yöntem ve varsayımlar gerektirir.</p>
+<h3 style="margin:30px 0 12px;color:var(--navy)">Kısa örnek</h3>
+<table><thead><tr><th>Bileşen</th><th>Hacim</th><th>1.000 kg ürüne göre</th></tr></thead><tbody><tr><td>Mavi</td><td>120 m³</td><td>120 L/kg</td></tr><tr><td>Yeşil</td><td>280 m³</td><td>280 L/kg</td></tr><tr><td>Gri</td><td>200 m³</td><td>200 L/kg</td></tr><tr><th>Toplam</th><th>600 m³</th><th>600 L/kg</th></tr></tbody></table>
+<p class="muted">Tablodaki sayılar yöntemi göstermek için seçilmiş varsayımsal örnek değerlerdir; belirli bir ürünün gerçek su ayak izi değildir.</p></div></section>
+<section id="kaynaklar" style="background:#edf4f8"><div class="wrap"><div class="section-head"><span class="kicker">DAHA FAZLASINI ÖĞREN</span><h2>Bilimsel kaynaklar</h2><p>Tanımlar ve yöntemler için başvurulabilecek temel kaynaklar:</p></div><div class="sources">
+<a href="https://www.suverimliligi.gov.tr/home/SuAyakIzi" target="_blank" rel="noopener">Türkiye · Su Verimliliği</a>
+<a href="https://www.waterfootprint.org/water-footprint-2/what-is-a-water-footprint/" target="_blank" rel="noopener">Water Footprint Network · Su ayak izi</a>
+<a href="https://www.waterfootprint.org/water-footprint-2/glossary/" target="_blank" rel="noopener">Water Footprint Network · Terimler sözlüğü</a>
+<a href="https://www.waterfootprint.org/resources/TheWaterFootprintAssessmentManual_English.pdf" target="_blank" rel="noopener">Su Ayak İzi Değerlendirme Kılavuzu (PDF)</a>
+</div><p class="muted" style="margin-top:18px">Bu site eğitim amaçlıdır. Resmî envanter, ürün etiketi veya bilimsel çalışma için güncel ve yerel verilerle standart metodoloji kullanılmalıdır.</p></div></section>
+</main>
+<footer><div class="wrap"><p><b>SUİZİ</b> · Mavi, yeşil ve gri su ayak izi rehberi</p><p>Su kaynaklarını anlamak, onları korumak için ilk adımdır.</p></div></footer>
+<script>
+const ids=['blue','green','pollution','cmax','cnat','yield'];
+const $=id=>document.getElementById(id);
+function num(id){return Number(String($(id).value).replace(',','.'))}
+function fmt(n){return n.toLocaleString('tr-TR',{maximumFractionDigits:2})}
+function calculate(){
+ $('error').textContent='';
+ const v=Object.fromEntries(ids.map(id=>[id,num(id)]));
+ if(ids.some(id=>!Number.isFinite(v[id])||v[id]<0)){ $('error').textContent='Lütfen sıfır veya daha büyük geçerli sayılar gir.';return; }
+ if(v.yield<=0){$('error').textContent='Üretim miktarı sıfırdan büyük olmalıdır.';return;}
+ if(v.cmax<=v.cnat){$('error').textContent='Cmax, Cnat değerinden büyük olmalıdır.';return;}
+ const grey=v.pollution/((v.cmax-v.cnat)*.001);
+ const parts=[v.blue,v.green,grey], sum=parts.reduce((a,b)=>a+b,0);
+ const per=parts.map(x=>x*1000/v.yield), total=sum*1000/v.yield;
+ $('total').textContent=fmt(total);
+ const max=Math.max(...parts,1);
+ [['b',0],['g',1],['gr',2]].forEach(([key,i])=>{$(key+'bar').style.width=(parts[i]/max*100)+'%';$(key+'val').textContent=fmt(per[i])+' L/kg';});
+ $('detail').textContent=`Toplam hacim: ${fmt(sum)} m³. Gri su hesabı: ${fmt(grey)} m³. Sonuçlar girilen varsayımlara bağlıdır.`;
+}
+$('calc').addEventListener('click',calculate);
+$('reset').addEventListener('click',()=>{['120','280','2','15','5','1000'].forEach((x,i)=>$(ids[i]).value=x);calculate();});
+ids.forEach(id=>$(id).addEventListener('keydown',e=>{if(e.key==='Enter')calculate()}));
+calculate();
+</script>
+</body>
+</html>
